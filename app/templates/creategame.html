@@ -1,0 +1,14 @@
+{% extends "home.html" %}
+{% block title %}Wait{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    Game id: {{data}}
+</div>
+<form action = "{{ url_for( 'create_user' ) }}" method = "POST">
+    <p>Name <input type="text" id="name" name="name"></p>
+    <input type="hidden" id="game" name="game" value="{{data}}">
+    <input type="hidden" id="create" name="create" value="create" />
+    <p><input type = "submit" value = "submit" /></p>
+</form>
+{% endblock %}

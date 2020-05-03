@@ -1,0 +1,40 @@
+{% extends "home.html" %}
+{% block title %}Wait{% endblock %}
+
+
+{% block content %}
+<div id="demo">
+
+</div>
+<a href="{{ url_for( 'enter_names' ) }}" style="display:none;" id="enterbtn" class="btn btn-primary">Enter Names</a>
+<a href="{{ url_for( 'game' ) }}" style="display:none;" id="startbtn" class="btn btn-primary">Start Game</a>
+
+<script>
+
+    setInterval(function(){ 
+        const url = '{{url_for('game_info')}}'
+        fetch(url)
+        .then(response => response.json())  
+        .then(data => {
+
+            document.getElementById("demo").innerHTML = "Game ID: " + data.id + "<br><br>";
+            for (var player in data.players) {
+                document.getElementById("demo").innerHTML += "Player: " + player + "<br> ID:" + data.players[player].id + "<br> Ready:" + data.players[player].ready + "<br><br>";
+            } 
+            console.log(data.state)
+            if (data.state == "0"){
+                $("#enterbtn").show();
+            } else if (data.state == "1" && data.individual.ready == "0") {
+                $("#enterbtn").show();
+            } else if (data.state == "1" && data.individual.ready == "1") {
+                $("#enterbtn").hide();
+            } else {
+                $("#startbtn").show();
+                $("#enterbtn").hide();
+                window.location.href = "{{ url_for( 'game' ) }}";
+            }
+        })
+    }, 1000);
+
+</script>
+{% endblock %}

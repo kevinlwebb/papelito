@@ -1,0 +1,19 @@
+{% extends "home.html" %}
+{% block title %}Wait{% endblock %}
+
+{% block content %}
+
+{% if game_id is not none %}   
+    <h2>Resume Game</h2>
+    <a href="{{ url_for( 'wait' ) }}" class="btn btn-primary">Resume</a> Game ID: {{ game_id }}
+{%endif %}
+
+<h2>Create User</h2>
+<form action = "{{ url_for( 'create_user' ) }}" method = "POST">
+    <p>Name <input type="text" id="name" name="name"></p>
+    <p>Game ID <input type="text" id="game" name="game"></p>
+    <input type="hidden" id="create" name="create" value="join" />
+    <p><input type = "submit" value = "submit" /></p>
+</form>
+
+{% endblock %}

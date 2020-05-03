@@ -1,0 +1,15 @@
+{% extends "home.html" %}
+{% block title %}Wait{% endblock %}
+
+{% block content %}
+
+<h2>Enter Three Names</h2>
+<form action = "{{ url_for( 'add_names' ) }}" method = "POST">
+    <p>Name 1 <input type="text" id="name1" name="name1"></p>
+    <p>Name 2 <input type="text" id="name2" name="name2"></p>
+    <p>Name 3 <input type="text" id="name3" name="name3"></p>
+    <input type="hidden" id="create" name="create" value="join" />
+    <p><input type = "submit" value = "submit" /></p>
+</form>
+
+{% endblock %}
